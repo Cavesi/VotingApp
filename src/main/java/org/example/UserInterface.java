@@ -7,10 +7,12 @@ public class UserInterface {
 
     Scanner scanner;
     ArrayList<Person> list;
+    Person currentUser;
 
     public UserInterface(Scanner scanner, ArrayList list) {
         this.scanner = scanner;
         this.list = list;
+        this.currentUser = null;
     }
 
     public void go() {
@@ -61,13 +63,38 @@ public class UserInterface {
 
         for (Person person : list) {
             if (person.getId().equals(login) && person.getPassword().equals(password)) {
-                System.out.println("Logged in correctly");
+                currentUser = person;
+                userScreen(currentUser);
                 return;
             }
         }
 
         System.out.println("Wrong login or password, please try again");
         logIn();
+
+    }
+
+    private void userScreen(Person currentUser){
+        System.out.println("Hello " + currentUser.getName() + " what do you want to do?");
+        System.out.println("1. Change password");
+        System.out.println("2. Run for Chairman");
+        System.out.println("3. Vote");
+
+        switch (readIntInput()) {
+            case (1):
+                currentUser.changePassword(scanner);
+                break;
+
+            case (2):
+                System.out.println("\nBlablablablabla\n");
+                break;
+            case (3):
+                System.exit(0);
+            case (4):
+                return;
+            default:
+                System.out.println("Incorrect choice, please try again");
+        }
 
     }
 

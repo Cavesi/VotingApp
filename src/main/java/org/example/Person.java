@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Person {
     private String id;
     private String name;
@@ -23,12 +25,8 @@ public class Person {
         candidateObject = new Candidate(this.id, this.name, this.secondName);
     }
 
-    public boolean isRunning() {
+    public boolean isRunningForChairman() {
         return isRunningForChairman;
-    }
-
-    public void setRunningForChariman(boolean running) {
-        isRunningForChairman = running;
     }
 
     public boolean hasVoted() {
@@ -37,10 +35,6 @@ public class Person {
 
     public void setHasVoted() {
         this.hasVoted = true;
-    }
-
-    public void getVote(){
-        candidateObject.voteFor();
     }
 
     public String candidateInfo(){
@@ -54,11 +48,33 @@ public class Person {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void changePassword(Scanner scanner) {
+        System.out.println("Old password: ");
+        String oldPassword = scanner.nextLine();
+        System.out.println("New password: ");
+        String newPassword = scanner.nextLine();
+        System.out.println("Confirm new password: ");
+        String confirmedNewPassword = scanner.nextLine();
+
+        if (oldPassword.equals(password) && newPassword.equals(confirmedNewPassword)) {
+            password = newPassword;
+        }
+
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public Candidate getCandidateObject() {
+        return candidateObject;
     }
 }
