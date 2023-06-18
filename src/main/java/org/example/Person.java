@@ -1,54 +1,53 @@
 package org.example;
 
-import java.time.LocalDate;
-
 public class Person {
-    private int id;
+    private String id;
     private String name;
     private String secondName;
-
     private Candidate  candidateObject = null;
-    private boolean isRunning;
+    private boolean isRunningForChairman;
     private boolean hasVoted;
-    private LocalDate dateOfBirth;
     private String password;
 
-    public Person(int id, String name, String secondName, LocalDate dateOfBirth, String password) {
+    public Person(String id, String name, String secondName, String password) {
         this.id = id;
         this.name = name;
         this.secondName = secondName;
-        this.isRunning = false;
+        this.isRunningForChairman = false;
         this.hasVoted = false;
-        this.dateOfBirth = dateOfBirth;
         this.password = password;
     }
 
     public void runForChairman(){
-        isRunning = true;
+        isRunningForChairman = true;
+        candidateObject = new Candidate(this.id, this.name, this.secondName);
     }
 
     public boolean isRunning() {
-        return isRunning;
+        return isRunningForChairman;
     }
 
-    public void setRunning(boolean running) {
-        isRunning = running;
+    public void setRunningForChariman(boolean running) {
+        isRunningForChairman = running;
     }
 
-    public boolean isHasVoted() {
+    public boolean hasVoted() {
         return hasVoted;
     }
 
-    public void setHasVoted(boolean hasVoted) {
-        this.hasVoted = hasVoted;
+    public void setHasVoted() {
+        this.hasVoted = true;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public void getVote(){
+        candidateObject.voteFor();
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public String candidateInfo(){
+        if (isRunningForChairman) {
+            return candidateObject.toString();
+        }
+        return name + " " + secondName + " is not running for Chairman";
     }
 
     public String getPassword() {
@@ -57,5 +56,9 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getId() {
+        return id;
     }
 }
